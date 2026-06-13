@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Department of Microbiology</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Segoe UI',sans-serif; background:#f0fdf8; color:#1e3a2f; }
+
+    /* ── NAV ── */
+    nav {
+      position:sticky; top:0; z-index:100;
+      background:rgba(255,255,255,0.88); backdrop-filter:blur(14px);
+      border-bottom:1px solid #a7f3d0;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:13px 32px; flex-wrap:wrap; gap:10px;
+      box-shadow:0 2px 16px rgba(16,185,129,0.08);
+    }
+    .logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+    .logo-icon {
+      width:38px; height:38px;
+      background:linear-gradient(135deg,#10b981,#059669);
+      border-radius:10px; display:flex; align-items:center; justify-content:center;
+      font-weight:800; font-size:13px; color:#fff;
+      box-shadow:0 4px 12px rgba(16,185,129,0.35);
+    }
+    .logo-text strong { display:block; color:#064e3b; font-size:14px; font-weight:700; }
+    .logo-text span   { color:#059669; font-size:11px; letter-spacing:.05em; }
+    nav ul { list-style:none; display:flex; gap:24px; align-items:center; }
+    nav ul a { color:#374151; text-decoration:none; font-size:13px; font-weight:500; transition:color .2s; }
+    nav ul a:hover { color:#059669; }
+    .nav-btn {
+      padding:8px 20px; border-radius:99px;
+      background:linear-gradient(135deg,#10b981,#059669);
+      color:#fff; font-size:13px; font-weight:600; border:none; cursor:pointer;
+      box-shadow:0 3px 12px rgba(16,185,129,0.3);
+      transition:box-shadow .2s, transform .2s;
+    }
+    .nav-btn:hover { box-shadow:0 5px 18px rgba(16,185,129,0.45); transform:translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      text-align:center; padding:80px 24px 64px;
+      background:linear-gradient(160deg, #ecfdf5 0%, #d1fae5 40%, #e0f2fe 100%);
+      position:relative; overflow:hidden;
+    }
+    .hero::before {
+      content:''; position:absolute; top:-60px; right:-60px;
+      width:320px; height:320px; border-radius:50%;
+      background:radial-gradient(circle, rgba(16,185,129,.18), transparent 70%);
+      pointer-events:none;
+    }
+    .hero::after {
+      content:''; position:absolute; bottom:-40px; left:-40px;
+      width:240px; height:240px; border-radius:50%;
+      background:radial-gradient(circle, rgba(6,182,212,.15), transparent 70%);
+      pointer-events:none;
+    }
+    .badge {
+      display:inline-block; padding:5px 16px; border-radius:99px;
+      border:1.5px solid #6ee7b7; background:#d1fae5;
+      color:#065f46; font-size:11px; font-weight:700; letter-spacing:.08em;
+      margin-bottom:20px; text-transform:uppercase;
+    }
+    .hero h1 {
+      font-size:clamp(26px,5vw,48px); font-weight:800; line-height:1.2;
+      color:#064e3b; margin-bottom:14px;
+    }
+    .hero h1 span {
+      background:linear-gradient(135deg,#10b981,#0284c7);
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .hero p { max-width:520px; margin:0 auto 30px; color:#374151; font-size:15px; line-height:1.75; }
+    .btn-primary {
+      display:inline-block; padding:12px 30px; border-radius:99px;
+      background:linear-gradient(135deg,#10b981,#059669);
+      color:#fff; font-size:14px; font-weight:700; text-decoration:none;
+      box-shadow:0 4px 18px rgba(16,185,129,0.35);
+      transition:box-shadow .2s, transform .2s;
+    }
+    .btn-primary:hover { box-shadow:0 6px 24px rgba(16,185,129,0.5); transform:translateY(-2px); }
+
+    /* ── SECTION ── */
+    section { padding:60px 24px; }
+    .container { max-width:920px; margin:0 auto; }
+    .sec-header { text-align:center; margin-bottom:36px; }
+    .sec-label {
+      display:inline-block; padding:4px 14px; border-radius:99px;
+      border:1.5px solid #6ee7b7; background:#d1fae5;
+      color:#065f46; font-size:11px; font-weight:700; letter-spacing:.07em;
+      text-transform:uppercase; margin-bottom:10px;
+    }
+    .sec-header h2 { font-size:clamp(20px,4vw,30px); font-weight:800; color:#064e3b; }
+
+    /* ── ABOUT ── */
+    #about { background:#fff; }
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:start; }
+    @media(max-width:640px){ .about-grid { grid-template-columns:1fr; } }
+    .about-text p { color:#4b5563; font-size:14px; line-height:1.85; margin-bottom:13px; }
+    .aims { margin-top:4px; display:flex; flex-direction:column; gap:9px; }
+    .aim-item { display:flex; gap:10px; align-items:flex-start; }
+    .aim-dot {
+      width:20px; height:20px; border-radius:50%; flex-shrink:0; margin-top:2px;
+      background:#d1fae5; border:1.5px solid #6ee7b7;
+      color:#059669; font-size:9px; font-weight:800;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .aim-item p { color:#4b5563; font-size:13px; line-height:1.7; }
+    .about-cards { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .acard {
+      padding:16px; border-radius:14px;
+      border:1.5px solid #d1fae5; background:#f0fdf8;
+      transition:border-color .2s, box-shadow .2s;
+    }
+    .acard:hover { border-color:#6ee7b7; box-shadow:0 6px 20px rgba(16,185,129,0.12); }
+    .acard .icon { font-size:20px; margin-bottom:8px; }
+    .acard h4 { color:#064e3b; font-size:13px; font-weight:700; margin-bottom:3px; }
+    .acard p  { color:#6b7280; font-size:12px; line-height:1.6; }
+    .aims-title { color:#064e3b; font-size:13px; font-weight:700; margin-bottom:9px; margin-top:2px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background:linear-gradient(135deg,#064e3b,#065f46);
+      padding:22px 32px;
+      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    }
+    footer .fl { display:flex; align-items:center; gap:9px; }
+    footer .fl .fi {
+      width:28px; height:28px; background:rgba(255,255,255,0.2);
+      border-radius:7px; display:flex; align-items:center; justify-content:center;
+      font-size:11px; font-weight:800; color:#fff;
+      border:1px solid rgba(255,255,255,0.25);
+    }
+    footer .fl span { color:#a7f3d0; font-size:12px; }
+    footer .links { display:flex; gap:18px; }
+    footer .links a { color:#6ee7b7; font-size:12px; text-decoration:none; transition:color .2s; }
+    footer .links a:hover { color:#fff; }
+    footer .copy { color:#6ee7b7; font-size:11px; opacity:.7; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="https://microbiologycchrc.github.io/sec-2/" target="_self" class="logo">
+      <div class="logo-icon">MB</div>
+      <div class="logo-text">
+        <strong>Department of Microbiology</strong>
+        <span>Clinical &amp; Diagnostic Services</span>
+      </div>
+    </a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li>
+        <button class="nav-btn" onclick="window.location.href='https://microbiologycchrc.github.io/sec-2/'">Visit Website</button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="badge">Department of Microbiology</div>
+    <h1>Diagnostic Excellence in<br/><span>Microbial Science</span></h1>
+    <p>Providing accurate, timely microbiological diagnostics and infection control services to support the best patient care.</p>
+    <a href="#about" class="btn-primary">About Us</a>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="sec-header">
+        <div class="sec-label">Who We Are</div>
+        <h2>About the Department</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>The <strong style="color:#064e3b">Department of Microbiology</strong> provides comprehensive microbiological diagnostic services, supporting clinicians with accurate pathogen identification and antibiotic sensitivity testing.</p>
+          <p>We operate BSL-2 certified facilities covering bacteriology, virology, mycology, parasitology, and molecular diagnostics — available 24 hours a day.</p>
+          <div class="aims-title">Our Aims</div>
+          <div class="aims">
+            <div class="aim-item"><div class="aim-dot">✓</div><p>Deliver timely, accurate diagnostic results to guide clinical decisions.</p></div>
+            <div class="aim-item"><div class="aim-dot">✓</div><p>Strengthen antibiotic stewardship and reduce antimicrobial resistance.</p></div>
+            <div class="aim-item"><div class="aim-dot">✓</div><p>Conduct active surveillance for healthcare-associated infections.</p></div>
+            <div class="aim-item"><div class="aim-dot">✓</div><p>Train healthcare staff in infection prevention best practices.</p></div>
+          </div>
+        </div>
+        <div class="about-cards">
+          <div class="acard"><div class="icon">🔬</div><h4>BSL-2 Lab</h4><p>Certified containment for safe specimen handling.</p></div>
+          <div class="acard"><div class="icon">🧫</div><h4>Culture & Sensitivity</h4><p>Rapid bacterial identification and AST reporting.</p></div>
+          <div class="acard"><div class="icon">🛡️</div><h4>Infection Control</h4><p>HAI surveillance and prevention programs.</p></div>
+          <div class="acard"><div class="icon">📊</div><h4>Antibiogram</h4><p>Annual resistance pattern analysis.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="fl">
+      <div class="fi">MB</div>
+      <span>Department of Microbiology</span>
+    </div>
+    <div class="links">
+      <a href="#about">About</a>
+    </div>
+    <span class="copy">© 2025 Department of Microbiology. All rights reserved.</span>
+  </footer>
+
+</body>
+</html>
